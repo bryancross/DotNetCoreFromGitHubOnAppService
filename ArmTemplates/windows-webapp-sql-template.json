@@ -29,8 +29,20 @@
         },
         "databaseName": {
             "type": "string"
-        }
     },
+    "BusinessUnit": {
+      "type": "string"
+    },
+    "Department": {
+      "type": "string"
+    },
+    "CustomerDemoName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "Solution": "Customer Specifc Solution"
+  },
     "resources": [
         {
             "type": "Microsoft.Web/sites",
@@ -38,7 +50,11 @@
             "apiVersion": "2016-08-01",
             "location": "[resourceGroup().location]",
             "tags": {
-                "[concat('hidden-related:', '/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "empty"
+              "[concat('hidden-related:', '/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "empty",
+              "Solution": "[variables('Solution')]",
+              "BusinessUnit": "[parameters('BusinessUnit')]",
+              "Department": "[parameters('Department')]",
+              "CustomerDemo": "[parameters('CustomerDemoName')]"
             },
             "resources": [
                 {
@@ -84,6 +100,12 @@
             "name": "[parameters('hostingPlanName')]",
             "apiVersion": "2015-08-01",
             "location": "[resourceGroup().location]",
+          "tags": {
+            "Solution": "[variables('Solution')]",
+            "BusinessUnit": "[parameters('BusinessUnit')]",
+            "Department": "[parameters('Department')]",
+            "CustomerDemo": "[parameters('CustomerDemoName')]"
+          },
             "properties": {
                 "name": "[parameters('hostingPlanName')]",
                 "workerSizeId": "0",
@@ -98,7 +120,11 @@
             "apiVersion": "2014-04-01",
             "location": "[parameters('appInsightsLocation')]",
             "tags": {
-                "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webAppName'))]": "Resource"
+              "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webAppName'))]": "Resource",
+              "Solution": "[variables('Solution')]",
+              "BusinessUnit": "[parameters('BusinessUnit')]",
+              "Department": "[parameters('Department')]",
+              "CustomerDemo": "[parameters('CustomerDemoName')]"
             },
             "properties": {
                 "applicationId": "[parameters('webAppName')]",
@@ -110,6 +136,12 @@
             "name": "[parameters('databaseServerName')]",
             "apiVersion": "2014-04-01-preview",
             "location": "[parameters('databaseLocation')]",
+            "tags": {
+              "Solution": "[variables('Solution')]",
+              "BusinessUnit": "[parameters('BusinessUnit')]",
+              "Department": "[parameters('Department')]",
+              "CustomerDemo": "[parameters('CustomerDemoName')]"
+            },
             "properties": {
                 "administratorLogin": "[parameters('databaseUsername')]",
                 "administratorLoginPassword": "[parameters('databasePassword')]",
@@ -121,6 +153,12 @@
                     "name": "[parameters('databaseName')]",
                     "apiVersion": "2014-04-01-preview",
                     "location": "[parameters('databaseLocation')]",
+                    "tags": {
+                      "Solution": "[variables('Solution')]",
+                      "BusinessUnit": "[parameters('BusinessUnit')]",
+                      "Department": "[parameters('Department')]",
+                      "CustomerDemo": "[parameters('CustomerDemoName')]"
+                    },
                     "properties": {
                         "edition": "Basic",
                         "collation": "SQL_Latin1_General_CP1_CI_AS",

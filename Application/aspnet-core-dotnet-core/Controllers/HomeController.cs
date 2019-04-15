@@ -24,6 +24,8 @@ namespace aspnet_core_dotnet_core.Controllers
             List<Class1> ObjCustomer = new List<Class1>();
             try
             {
+                ViewData["Message"] = "This demo was built for " + configuration.GetValue<string>("CustomerDemoName", "Un-Named Customer") + ".";
+
                 String constring = configuration.GetConnectionString("DefaultConnection");
                 using (var connection = new SqlConnection(constring))
                 {
@@ -133,7 +135,7 @@ namespace aspnet_core_dotnet_core.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Your About page. This demo was built for " + configuration.GetValue<string>("CustomerDemoName", "Un-Named Customer") + ".";
             try
             {
 
