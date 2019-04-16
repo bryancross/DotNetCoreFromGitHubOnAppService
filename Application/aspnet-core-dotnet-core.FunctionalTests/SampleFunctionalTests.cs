@@ -25,7 +25,7 @@ namespace SampleWebApplication.FunctionalTests
                 driver = GetChromeDriver();
                 var webAppUrl = testContext.Properties["webAppUrl"].ToString();
                 driver.Navigate().GoToUrl(webAppUrl);
-                Assert.AreEqual("Home Page - Azure DevOps and GitHub Demo", driver.Title, "Expected title to be 'Home Page - DevOps Project Demo'");
+                Assert.AreEqual("Home Page - GitHub Demo", driver.Title, "Expected title to be 'Home Page - GitHub Demo'");
             }
             finally
             {
